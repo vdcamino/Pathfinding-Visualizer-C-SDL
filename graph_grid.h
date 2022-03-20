@@ -7,7 +7,12 @@
 #include "graph_node.h"
 
 typedef struct GraphGrid {
-	GraphNode position[GRID_WIDTH][GRID_HEIGHT];
+	struct GraphNode* position[GRID_WIDTH][GRID_HEIGHT];
 } GraphGrid;
 
+// 
+GraphGrid* gridInit();
+
+
+void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f);
 #endif

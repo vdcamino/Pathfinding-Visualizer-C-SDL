@@ -10,9 +10,6 @@ typedef struct GraphNode {
 	int status;
 } GraphNode;
 
-// Function that prints a box 
-void BoxPrint(SDL_Renderer* renderer, int col, int row);
-
 #endif
 
 

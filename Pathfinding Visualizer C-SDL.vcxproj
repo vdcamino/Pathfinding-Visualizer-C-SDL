@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dijkstra.c" />
+    <ClCompile Include="graphics.c" />
     <ClCompile Include="graph_grid.c" />
     <ClCompile Include="graph_node.c" />
     <ClCompile Include="main.c" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dijkstra.h" />
+    <ClInclude Include="graphics.h" />
     <ClInclude Include="graph_grid.h" />
     <ClInclude Include="graph_node.h" />
   </ItemGroup>
