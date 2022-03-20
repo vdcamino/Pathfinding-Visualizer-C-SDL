@@ -7,7 +7,7 @@
 #include "graph_node.h"
 
 typedef struct GraphGrid {
-	GraphNode grid[GRID_WIDTH][GRID_HEIGHT];
+	GraphNode position[GRID_WIDTH][GRID_HEIGHT];
 } GraphGrid;
 
 #endif
