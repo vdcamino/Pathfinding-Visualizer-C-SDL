@@ -5,22 +5,27 @@
 #include "graphics.h"
 
 // Initialize the grid with +inf partout
-GraphGrid* gridInit(){
+GraphGrid* gridInit(int grid_width, int grid_height){
 	GraphGrid* grid = (GraphGrid*)malloc(sizeof(GraphGrid));
 	int cont = 1;
-	for (int row = 0; row < GRID_HEIGHT; row++)
-		for (int col = 0; col < GRID_WIDTH; col++){
-			grid->position[col][row]->symbol = 0;
-			grid->position[col][row]->value = cont; cont++;
-			grid->position[col][row]->shortest = 100;
-			grid->position[col][row]->previous_column = -10;
-			grid->position[col][row]->previous_row = -20;
-			grid->position[col][row]->status = -5;
+	for (int row = 0; row < grid_height; row++)
+		for (int col = 0; col < grid_width; col++){
+			GraphNode* novo = (GraphNode*)malloc(sizeof(GraphNode));
+			novo->symbol = 10;
+			novo->value = cont; cont++;
+			novo->shortest = 100;
+			novo->previous_column = -10;
+			novo->previous_row = -20;
+			novo->status = -5;
+			grid->position[col][row] = novo;
 		}
+	grid->f = 0;
+	grid->n = 2;
+	grid->clicks = 1;
 	return grid;
 }
 
-void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
+void printGrid(SDL_Renderer* renderer, GraphGrid* grid)
 {
 	int s_cont = 0, m = 0, l = 0, z = 0;
 	static int k = 0;
@@ -53,7 +58,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 						}
 						if (k == 1 && z == 0)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row - 1, col);
@@ -67,7 +72,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 					case 2:
 						if (k == 1)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row - 1, col);
@@ -125,7 +130,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 						}
 						if (k == 1 && z == 1)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row, col - 1);
@@ -139,7 +144,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 					case 2:
 						if (k == 1)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row, col - 1);
@@ -191,7 +196,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 						}
 						if (k == 1 && z == 2)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row + 1, col);
@@ -205,7 +210,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 					case 2:
 						if (k == 1)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row + 1, col);
@@ -257,7 +262,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 						}
 						if (k == 1 && z == 3)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row, col + 1);
@@ -271,7 +276,7 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 					case 2:
 						if (k == 1)
 						{
-							if (f == 1)
+							if (grid->f == 1)
 							{
 								SDL_SetRenderDrawColor(renderer, 255, 153, 204, 255);
 								FullBoxPrint(renderer, row, col + 1);
@@ -322,6 +327,6 @@ void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f)
 	if (k == 0)
 	{
 		k = 1;
-		printGrid(renderer, grid, f);
+		printGrid(renderer, grid);
 	}
 }

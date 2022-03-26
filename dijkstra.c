@@ -3,13 +3,13 @@
 #include "dijkstra.h"
 #include "graph_grid.h"
 
-void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
+void dijkstra(SDL_Renderer* renderer, GraphGrid* grid){
 	int n = 1, row, col, m = 0;
 	int k = 0;
 
 	while (1)
 	{
-		f = 0;
+		grid->f = 0;
 		for (row = 0; row < GRID_HEIGHT; row++)
 		{
 			for (col = 0; col < GRID_WIDTH; col++)
@@ -39,7 +39,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 												if (grid->position[x][y]->symbol == 1)
 												{
 													m++;
-													f = 1;
+													grid->f = 1;
 													break;
 												}
 
@@ -65,7 +65,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 						grid->position[col][row - 1]->status = -6;
 						grid->position[col][row - 1]->previous_row = row;
 						grid->position[col][row - 1]->previous_column = col;
-						f = 1;
+						grid->f = 1;
 					}
 
 					if (col - 1 >= 0 && grid->position[col - 1][row]->status == -5 && grid->position[col - 1][row]->symbol != 4)
@@ -75,7 +75,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 						grid->position[col - 1][row]->status = -6;
 						grid->position[col - 1][row]->previous_row = row;
 						grid->position[col - 1][row]->previous_column = col;
-						f = 1;
+						grid->f = 1;
 					}
 
 					if (col + 1 < GRID_WIDTH && grid->position[col + 1][row]->status == -5 && grid->position[col + 1][row]->symbol != 4)
@@ -85,7 +85,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 						grid->position[col + 1][row]->status = -6;
 						grid->position[col + 1][row]->previous_row = row;
 						grid->position[col + 1][row]->previous_column = col;
-						f = 1;
+						grid->f = 1;
 					}
 
 					if (row + 1 < GRID_HEIGHT && grid->position[col][row + 1]->status == -5 && grid->position[col][row + 1]->symbol != 4)
@@ -95,7 +95,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 						grid->position[col][row + 1]->status = -6;
 						grid->position[col][row + 1]->previous_row = row;
 						grid->position[col][row + 1]->previous_column = col;
-						f = 1;
+						grid->f = 1;
 					}
 				}
 			}
@@ -103,7 +103,7 @@ void dijkstra(SDL_Renderer* renderer, GraphGrid* grid, int f){
 			if (m > 0)
 				break;
 		}
-		if (f == 0)
+		if (grid->f == 0)
 			break;
 
 		if (m > 0)

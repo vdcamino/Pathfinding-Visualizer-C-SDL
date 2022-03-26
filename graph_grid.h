@@ -8,11 +8,14 @@
 
 typedef struct GraphGrid {
 	struct GraphNode* position[GRID_WIDTH][GRID_HEIGHT];
+	int n;
+	int f;
+	int clicks;
 } GraphGrid;
 
 // 
-GraphGrid* gridInit();
+GraphGrid* gridInit(int grid_width, int grid_height);
 
 
-void printGrid(SDL_Renderer* renderer, GraphGrid* grid, int f);
+void printGrid(SDL_Renderer* renderer, GraphGrid* grid);
 #endif

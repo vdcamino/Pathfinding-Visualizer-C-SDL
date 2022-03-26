@@ -155,6 +155,7 @@
     <ClCompile Include="graphics.c" />
     <ClCompile Include="graph_grid.c" />
     <ClCompile Include="graph_node.c" />
+    <ClCompile Include="interactions.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="graph_grid.h" />
     <ClInclude Include="graph_node.h" />
+    <ClInclude Include="interactions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
